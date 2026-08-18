@@ -1,0 +1,3 @@
+.MuiDateRangeCalendar-root > div:first-child {
+  display: none !important;
+}

@@ -1,0 +1,190 @@
+'use client';
+
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+// @mui
+import LoadingButton from '@mui/lab/LoadingButton';
+import Link from '@mui/material/Link';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import InputAdornment from '@mui/material/InputAdornment';
+// hooks
+import { useBoolean } from 'src/hooks/use-boolean';
+// routes
+import { paths } from 'src/routes/paths';
+import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks';
+// auth
+import { useAuthContext } from 'src/auth/hooks';
+// components
+import Iconify from 'src/components/iconify';
+import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import GoogleLoginButton from 'src/components/google-login-button/google-login-button';
+// ----------------------------------------------------------------------
+
+export default function JwtRegisterView() {
+  const { register } = useAuthContext();
+
+  const router = useRouter();
+
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const password = useBoolean();
+
+  const RegisterSchema = Yup.object().shape({
+    firstName: Yup.string().trim().required('First name required'),
+    lastName: Yup.string().trim().required('Last name required'),
+    email: Yup.string().trim().required('Email is required').email('Email must be a valid email address'),
+    password: Yup.string().trim()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters'),
+  });
+
+  const defaultValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  };
+
+  const methods = useForm({
+    resolver: yupResolver(RegisterSchema),
+    defaultValues,
+  });
+
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods;
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const response = await register?.(data.email, data.password, data.firstName, data.lastName);
+
+      if (response.status) {
+        setSuccessMsg(response.message);
+        setTimeout(() => {
+          router.push(paths.auth.jwt.login);
+        }, 2000);
+      } else {
+        setErrorMsg(response.message);
+        // reset();
+      }
+
+    } catch (error) {
+      console.error(error);
+      // reset();
+      setErrorMsg(typeof error === 'string' ? error : error.message);
+    }
+  });
+
+  const renderHead = (
+    <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
+      <Typography variant="h4">Get started absolutely free</Typography>
+
+      <Stack direction="row" spacing={0.5}>
+        <Typography variant="body2"> Already have an account? </Typography>
+
+        <Link href={paths.auth.jwt.login} component={RouterLink} variant="subtitle2">
+          Sign in
+        </Link>
+      </Stack>
+    </Stack>
+  );
+
+  const renderTerms = (
+    <Typography
+      component="div"
+      sx={{
+        color: 'text.secondary',
+        mt: 2.5,
+        typography: 'caption',
+        textAlign: 'center',
+      }}
+    >
+      {"By signing up, I agree to "}
+      <Link
+        href="https://trendingcontent.net/trendingcontent-terms-of-service-tos/"
+        underline="always"
+        color="text.primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Terms of Service
+      </Link>
+      {" and "}
+      <Link
+        href="https://trendingcontent.net/privacy-policy/"
+        underline="always"
+        color="text.primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Privacy Policy
+      </Link>
+      .
+    </Typography>
+  );
+
+  const renderForm = (
+    <FormProvider methods={methods} onSubmit={onSubmit}>
+      <Stack spacing={2.5}>
+        {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+        {!!successMsg && <Alert severity="success">{successMsg}</Alert>}
+
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <RHFTextField name="firstName" label="First name" />
+          <RHFTextField name="lastName" label="Last name" />
+        </Stack>
+
+        <RHFTextField name="email" label="Email address" />
+
+        <RHFTextField
+          name="password"
+          label="Password"
+          type={password.value ? 'text' : 'password'}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={password.onToggle} edge="end">
+                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        <LoadingButton
+          fullWidth
+          color="inherit"
+          size="large"
+          type="submit"
+          variant="contained"
+          loading={isSubmitting}
+        >
+          Create account
+        </LoadingButton>
+      </Stack>
+    </FormProvider>
+  );
+
+  return (
+    <>
+      {renderHead}
+
+      {renderForm}
+
+      {renderTerms}
+
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px' }}>
+        <GoogleLoginButton />
+      </div>
+    </>
+  );
+}

@@ -1,0 +1,32 @@
+.CustomXs-custom-select .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedStart.css-1enpmhp-MuiInputBase-root-MuiOutlinedInput-root{
+  height: 36px !important;
+}
+.CustomXs-custom-select div{
+  padding-block: 4px;
+}
+.CustomXs-custom-select .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input.css-rv517n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1rem;
+    font-family: '__Public_Sans_7dd612', '__Public_Sans_Fallback_7dd612', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: grey;
+}
+.CustomXs-custom-select {
+    height: 36px !important;
+}
+.CustomXs-custom-overlay-select p{
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.CustomXs-custom-overlay-select{
+   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* auto-resizing columns */
+  gap: 20px; /* spacing between grid items */
+  padding: 10px;
+  align-items: center;
+}
+.metric-tabs-wrapper div {
+    justify-content: space-between !important;
+}

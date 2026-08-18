@@ -1,0 +1,45 @@
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Enter the VPS and npm install/build for frontend
+          caches:
+            - node
+          script:
+            - pipe: atlassian/ssh-run:0.2.3
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER: $SERVER_IP
+                COMMAND: 'cd ~/trendingContent && git checkout main && git pull origin main && source ~/.nvm/nvm.sh && cd front && npm install && npm run build && pm2 restart main_front'
+      - step:
+          name: Enter the VPS and npm install/build for backend
+          caches:
+            - node
+          script:
+            - pipe: atlassian/ssh-run:0.2.3
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER:  $SERVER_IP
+                COMMAND: 'cd ~/trendingContent && git checkout main && git pull origin main && source ~/.nvm/nvm.sh && cd server && npm install && pm2 restart main_server'
+    dev:
+      - step:
+          name: Enter the VPS and npm install/build for frontend
+          caches:
+            - node
+          script:
+            - pipe: atlassian/ssh-run:0.2.3
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER: $SERVER_IP
+                COMMAND: 'cd ~/trendingContent && git checkout dev && git pull origin dev && source ~/.nvm/nvm.sh && cd front && npm install && npm run build:dev && pm2 restart dev_front'
+      - step:
+          name: Enter the VPS and npm install/build for backend
+          script:
+            - pipe: atlassian/ssh-run:0.2.3
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER: $SERVER_IP
+                COMMAND: 'cd ~/trendingContent && git checkout dev && git pull origin dev && source ~/.nvm/nvm.sh && cd server && npm install && pm2 restart dev_server'
+          caches:
+            - node

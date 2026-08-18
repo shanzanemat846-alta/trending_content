@@ -1,0 +1,19 @@
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_b_1_368)">
+<rect width="22" height="22" rx="8" fill="#AFAFAF" fill-opacity="0.15"/>
+<rect x="0.5" y="0.5" width="21" height="21" rx="7.5" stroke="url(#paint0_linear_1_368)"/>
+<path d="M16.9531 6.61431C17.0973 7.00265 16.8993 7.43428 16.5109 7.57837C15.7168 7.87301 14.8455 8.48631 13.9635 9.29664C13.0899 10.0993 12.2481 11.0555 11.5095 11.983C10.7724 12.9087 10.1473 13.7941 9.70632 14.4486C9.48607 14.7754 9.31238 15.0438 9.19428 15.2296C9.13524 15.3224 9.09013 15.3946 9.06008 15.443L9.02646 15.4974L9.01839 15.5107L9.01659 15.5137C8.87883 15.7407 8.63086 15.8786 8.36526 15.8752C8.09962 15.8717 7.85563 15.728 7.72382 15.4973C7.01189 14.2514 6.42377 13.6905 6.0699 13.4428C5.89406 13.3197 5.77443 13.2727 5.72181 13.2559C5.70939 13.252 5.70027 13.2496 5.69454 13.2482C5.30623 13.2198 5 12.8958 5 12.5002C5 12.086 5.33579 11.7502 5.75 11.7502C5.8385 11.7562 6.04772 11.7798 6.17662 11.8265C6.38182 11.8918 6.63719 12.0089 6.9301 12.2139C7.34994 12.5078 7.84261 12.9792 8.37943 13.734C8.40632 13.6937 8.43396 13.6525 8.46234 13.6104C8.91885 12.9329 9.56765 12.0136 10.3361 11.0486C11.1031 10.0855 11.9983 9.06521 12.9487 8.19205C13.8907 7.3266 14.9303 6.5649 15.9891 6.17204C16.3774 6.02796 16.809 6.22597 16.9531 6.61431Z" fill="black"/>
+</g>
+<defs>
+<filter id="filter0_b_1_368" x="-25" y="-25" width="72" height="72" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="12.5"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_1_368"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_1_368" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_1_368" x1="16.7619" y1="20.4286" x2="0.0698782" y2="5.65976" gradientUnits="userSpaceOnUse">
+<stop stop-color="#AFAFAF" stop-opacity="0"/>
+<stop offset="1" stop-color="#AFAFAF" stop-opacity="0.2"/>
+</linearGradient>
+</defs>
+</svg>

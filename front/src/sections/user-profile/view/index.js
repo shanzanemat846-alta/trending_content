@@ -1,0 +1,1 @@
+export { default as EditUserProfileView } from './edit-user-profile-view';
