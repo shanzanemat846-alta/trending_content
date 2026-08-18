@@ -9,6 +9,9 @@
 node_modules/
 dist/
 
+# Local tooling
+graphify-out/
+
 # Environment files
 .env
 .env.*
